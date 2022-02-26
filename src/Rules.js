@@ -59,7 +59,6 @@ class SumDistro extends Rule {
 
 class FullHouse extends Rule {
   evalRoll = (dice) => {
-    console.log(this.freq(dice));
     return [2, 3].every((val) => this.freq(dice).includes(val))
       ? this.score
       : 0;
@@ -68,8 +67,28 @@ class FullHouse extends Rule {
 
 /** Check for small straights. */
 
-class SmallStraight {
-  // TODO
+class SmallStraight extends Rule {
+  evalRoll = (dice) => {
+    let d = new Set(dice.sort());
+    d = new Array(...d);
+    d.sort();
+
+    let maxSeq = 1;
+
+    for (let i = 1; i < d.length; i++) {
+      let step = d[i] - d[i - 1];
+
+      if (step === 1) {
+        maxSeq++;
+        console.log(maxSeq);
+        if (maxSeq === 4) return this.score;
+      } else {
+        maxSeq = 1;
+      }
+    }
+
+    return 0;
+  };
 }
 
 /** Check for large straights. */
@@ -108,7 +127,7 @@ const fourOfKind = new SumDistro({ count: 4 });
 const fullHouse = new FullHouse({ score: 25 });
 
 // small/large straights score as 30/40
-const smallStraight = "TODO";
+const smallStraight = new SmallStraight({ score: 30 });
 const largeStraight = new LargeStraight({ score: 40 });
 
 // yahtzee scores as 50
