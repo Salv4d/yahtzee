@@ -1,4 +1,13 @@
 import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faDiceOne,
+  faDiceTwo,
+  faDiceThree,
+  faDiceFour,
+  faDiceFive,
+  faDiceSix,
+} from "@fortawesome/free-solid-svg-icons";
 import "./Die.css";
 
 class Die extends Component {
@@ -13,14 +22,24 @@ class Die extends Component {
   }
 
   render() {
+    const diceNum = {
+      1: faDiceOne,
+      2: faDiceTwo,
+      3: faDiceThree,
+      4: faDiceFour,
+      5: faDiceFive,
+      6: faDiceSix,
+    };
+
     return (
-      <button
-        className={"Die"}
-        style={{ backgroundColor: this.props.locked ? "grey" : "black" }}
-        onClick={this.handleClick}
-      >
-        {this.props.val}
-      </button>
+      <div>
+        <FontAwesomeIcon
+          className={"Die fa-solid"}
+          icon={diceNum[this.props.val]}
+          style={{ backgroundColor: this.props.locked ? "grey" : "black" }}
+          onClick={this.handleClick}
+        />
+      </div>
     );
   }
 }
