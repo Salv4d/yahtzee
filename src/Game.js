@@ -14,19 +14,19 @@ class Game extends Component {
       locked: Array(NUM_DICE).fill(false),
       rollsLeft: NUM_ROLLS,
       scores: {
-        ones: undefined,
-        twos: undefined,
-        threes: undefined,
-        fours: undefined,
-        fives: undefined,
-        sixes: undefined,
-        threeOfKind: undefined,
-        fourOfKind: undefined,
-        fullHouse: undefined,
-        smallStraight: undefined,
-        largeStraight: undefined,
-        yahtzee: undefined,
-        chance: undefined,
+        ones: "1 point per 1",
+        twos: "2 points per 2",
+        threes: "3 points per 3",
+        fours: "4 points per 4",
+        fives: "5 points per 5",
+        sixes: "6 points per 6",
+        threeOfKind: "Sum all dice if 3 are the same",
+        fourOfKind: "Sum all dice if 4 are the same",
+        fullHouse: "25 points for a full house",
+        smallStraight: "30 points for a small straight",
+        largeStraight: "40 points for a large straight",
+        yahtzee: "50 points for yahtzee",
+        chance: "Sum of all dice",
       },
     };
     this.roll = this.roll.bind(this);
@@ -61,7 +61,11 @@ class Game extends Component {
   }
 
   doScore(rulename, ruleFn) {
-    if (this.state.scores[rulename] >= 0) {
+    console.log(
+      typeof this.state.scores[rulename],
+      this.state.scores[rulename]
+    );
+    if (typeof this.state.scores[rulename] === "number") {
       return;
     }
 
