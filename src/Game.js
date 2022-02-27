@@ -61,6 +61,10 @@ class Game extends Component {
   }
 
   doScore(rulename, ruleFn) {
+    if (this.state.scores[rulename] >= 0) {
+      return;
+    }
+
     // evaluate this ruleFn with the dice and score this rulename
     this.setState((st) => ({
       scores: { ...st.scores, [rulename]: ruleFn(this.state.dice) },
