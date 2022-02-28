@@ -36,7 +36,9 @@ class Die extends Component {
         <FontAwesomeIcon
           className={"Die fa-solid"}
           icon={diceNum[this.props.val]}
-          style={{ backgroundColor: this.props.locked ? "grey" : "black" }}
+          style={{
+            backgroundColor: this.props.locked ? "grey" : "transparent",
+          }}
           onClick={this.handleClick}
         />
       </div>
